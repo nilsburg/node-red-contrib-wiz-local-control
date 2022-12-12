@@ -1,0 +1,36 @@
+<script type="text/javascript">
+  
+  RED.nodes.registerType("wiz-config", {
+    category: "config",
+    defaults: {
+      name: { value: "", required: false },
+      interface: { value: "", required: true },
+    },
+    label: function () {
+      return (this.name || "Interface") + " " + this.interface;
+    }
+  });
+
+</script>
+
+
+<script type="text/html" data-template-name="wiz-config">
+
+  <div class="form-row">
+    <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-config-input-name" placeholder="Name">
+  </div>
+
+  <div class="form-row">
+    <label for="node-config-input-inteface"><i class="fa fa-sitemap"></i> Interface</label>
+    <input type="text" id="node-config-input-interface" placeholder="eth0">
+  </div>
+
+</script>
+
+<script type="text/html" data-help-name="wiz-config">
+  <p>Connects to a WiZ Network</p>
+
+  <h3>Interface</h3>
+  <p>Interface name of the network adapter.</p>
+</script>

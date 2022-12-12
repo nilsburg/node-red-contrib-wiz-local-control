@@ -1,0 +1,33 @@
+{
+  "name": "node-red-contrib-wiz-local-control",
+  "version": "1.0.0",
+  "description": "Local WIZ control for Node-RED",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heleon19/node-red-contrib-wiz-local-control.git"
+  },
+  "keywords": [
+    "node-red",
+    "wiz",
+    "local wiz"
+  ],
+  "author": "Reto Jenni, Villmergen, Switzerland",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/heleon19/node-red-contrib-wiz-local-control/issues"
+  },
+  "homepage": "https://github.com/heleon19/node-red-contrib-wiz-local-control#readme",
+  "dependencies": {
+    "@heleon19/wiz-local-control": "^2.0.0"
+  },
+  "node-red": {
+    "nodes": {
+      "wiz-device": "wiz-device.js",
+      "wiz-config": "wiz-config.js"
+    }
+  }
+}

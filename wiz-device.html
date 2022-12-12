@@ -1,0 +1,115 @@
+<script type="text/javascript">
+  
+
+  RED.nodes.registerType("wiz-device", {
+    category: "WiZ",
+    defaults: {
+      wiz_config: { value: undefined, type: "wiz-config", required: true },
+      ip: { value: "", required: true }
+    },
+    inputs: 1,
+    outputs: 7,
+    outputLabels: [ "State", "Scene ID", "Brightness", "Temperature", "Red", "Green", "Blue" ],
+    icon: "light.svg",
+    color: "#bfa2ca",
+    label: function () {
+      return this.name || ("WiZ Device" + " " + this.ip);
+    },
+    paletteLabel: "WiZ Device",
+    oneditprepare: function () {
+      hbUtils.eachHtml(hbModbusWrite, this);
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="wiz-device">
+
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-wiz_config"><i class="fa fa-sitemap"></i> Interface</label>
+    <input type="text" id="node-input-wiz_config">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-ip"><i class="fa fa-sitemap"></i> IP</label>
+    <input type="text" id="node-input-ip" placeholder="192.168.1.100">
+  </div>
+
+</script>
+
+<script type="text/html" data-help-name="wiz-device">
+  <p>Controls a local WiZ device.</p>
+  <p>The outputs are written cyclically regardless of value changes, if necessary use RBE filter.</p>
+
+  <h3>Interace</h3>
+  <p>Used network interface of this device</p>
+
+  <h3>IP</h3>
+  <p>Device IP Address</p>
+
+  <h3>Inputs</h3>
+  <dl class="message-properties">
+    <dt>payload topic=state<span class="property-type">boolean</span></dt>
+    <dd>
+      Change state to ON / OFF <code>true / false</code>
+    </dd>
+  </dl>
+  <dl class="message-properties">
+    <dt>payload topic=scene-id<span class="property-type">number</span></dt>
+    <dd>
+      Set scene by ID <code>1-28</code>
+    </dd>
+  </dl>
+  <dl class="message-properties">
+    <dt>payload topic=brightness<span class="property-type">number</span></dt>
+    <dd>
+      Change brightness <code>10-100</code>
+    </dd>
+  </dl>
+  <dl class="message-properties">
+    <dt>payload topic=temperature<span class="property-type">number</span></dt>
+    <dd>
+      Change color temperature <code>2200-6500</code>
+    </dd>
+  </dl>
+  <dl class="message-properties">
+    <dt>payload topic=color<span class="property-type">object</span></dt>
+    <dd>
+      Change RGB color <code>0-256</code> <code>{ r: red, g: green, b: blue }</code>
+    </dd>
+  </dl>
+
+  <h3>Outputs</h3>
+  <dl class="message-properties">
+    <dt>State <span class="property-type">boolean</span></dt>
+    <dd>Actual device state</dd>
+  </dl>
+  <dl class="message-properties">
+    <dt>Scene ID <span class="property-type">number</span></dt>
+    <dd>Actual scene ID.</dd>
+  </dl>
+  <dl class="message-properties">
+    <dt>Brightness <span class="property-type">number</span></dt>
+    <dd>Actual brightness level.</dd>
+  </dl>
+  <dl class="message-properties">
+    <dt>Temperature <span class="property-type">number</span></dt>
+    <dd>Actual color temperature.</dd>
+  </dl>
+  <dl class="message-properties">
+    <dt>Red <span class="property-type">number</span></dt>
+    <dd>Actual red color.</dd>
+  </dl>
+  <dl class="message-properties">
+    <dt>Green <span class="property-type">number</span></dt>
+    <dd>Actual green color.</dd>
+  </dl>
+  <dl class="message-properties">
+    <dt>Blue <span class="property-type">number</span></dt>
+    <dd>Actual blue color.</dd>
+  </dl>
+</script>
