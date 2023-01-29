@@ -34,28 +34,28 @@ module.exports = function (RED) {
     }
 
 
-    node.on("input", (msg) => {
+    node.on("input", async (msg) => {
       try {
         if (msg.topic === "state") {
-          wizLocalControl.changeStatus(Boolean(msg.payload), config.ip);
+          await wizLocalControl.changeStatus(Boolean(msg.payload), config.ip);
 
         } else if (msg.topic === "scene-id") {
-          wizLocalControl.changeLightMode({
+          await wizLocalControl.changeLightMode({
             type: "scene",
             sceneId: Number(msg.payload)
           }, config.ip);
           
         } else if (msg.topic === "brightness") {
-          wizLocalControl.changeBrightness(Number(msg.payload), config.ip);
+          await wizLocalControl.changeBrightness(Number(msg.payload), config.ip);
           
         } else if (msg.topic === "temperature") {
-          wizLocalControl.changeLightMode({
+          await wizLocalControl.changeLightMode({
             type: "temperature",
             colorTemperature: Number(msg.payload)
           }, config.ip);
           
         } else if (msg.topic === "color") {
-          wizLocalControl.changeLightMode({
+          await wizLocalControl.changeLightMode({
             type: "color",
             r: msg.payload.r, g: msg.payload.g, b: msg.payload.b 
           }, config.ip);
